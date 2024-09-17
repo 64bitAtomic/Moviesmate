@@ -1,11 +1,27 @@
-import logo from "./logo.svg";
 import "./App.css";
-
+import Banner from "./components/Banner";
+import Movies from "./components/Movies";
+import NavBar from "./components/NavBar";
+import Watchlist from "./components/Watchlist";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 function App() {
   return (
-    <div className="text-2xl font-bold underline App">
-      <h1>Movesmate</h1>
-    </div>
+    <>
+      <BrowserRouter>
+        <NavBar />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <Banner /> <Movies />
+              </>
+            }
+          />
+          <Route path="/watchlist" element={<Watchlist />} />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 
