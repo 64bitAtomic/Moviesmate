@@ -6,11 +6,17 @@ import NavBar from "./components/NavBar";
 import Watchlist from "./components/Watchlist";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 function App() {
-  let [watchlist, setWatchLite] = useState([]);
+  let [watchlist, setWatchList] = useState([]);
   let handleAddWatchlist = (movieObj) => {
     let newWatchList = [...watchlist, movieObj];
-    setWatchLite(newWatchList);
+    setWatchList(newWatchList);
     console.log(newWatchList);
+  };
+  let handelRemoveFromWatchList = (movieObj) => {
+    let filteredWatchList = watchlist.filter((movie) => {
+      return movie.id != movieObj.id;
+    });
+    setWatchList(filteredWatchList);
   };
   return (
     <>
@@ -21,7 +27,12 @@ function App() {
             path="/"
             element={
               <>
-                <Banner /> <Movies handleAddWatchlist={handleAddWatchlist} />
+                <Banner />{" "}
+                <Movies
+                  handleAddWatchlist={handleAddWatchlist}
+                  handelRemoveFromWatchList={handelRemoveFromWatchList}
+                  watchlist={watchlist}
+                />
               </>
             }
           />
