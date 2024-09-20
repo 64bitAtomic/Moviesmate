@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./App.css";
 import Banner from "./components/Banner";
 import Movies from "./components/Movies";
@@ -5,6 +6,12 @@ import NavBar from "./components/NavBar";
 import Watchlist from "./components/Watchlist";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 function App() {
+  let [watchlist, setWatchLite] = useState([]);
+  let handleAddWatchlist = (movieObj) => {
+    let newWatchList = [...watchlist, movieObj];
+    setWatchLite(newWatchList);
+    console.log(newWatchList);
+  };
   return (
     <>
       <BrowserRouter>
@@ -14,7 +21,7 @@ function App() {
             path="/"
             element={
               <>
-                <Banner /> <Movies />
+                <Banner /> <Movies handleAddWatchlist={handleAddWatchlist} />
               </>
             }
           />

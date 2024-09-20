@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import MovieCard from "./MovieCard";
 import axios from "axios";
 import Pagination from "./Pagination";
-const Movies = () => {
+const Movies = ({ handleAddWatchlist }) => {
   const [movies, setMovies] = useState([]);
   const [pageNo, setPageNo] = useState(1);
 
@@ -33,8 +33,11 @@ const Movies = () => {
         {movies.map((movieObj) => {
           return (
             <MovieCard
+              key={movieObj.id}
+              movieObj={movieObj}
               poster_path={movieObj.poster_path}
               name={movieObj.original_title}
+              handleAddWatchlist={handleAddWatchlist}
             />
           );
         })}
