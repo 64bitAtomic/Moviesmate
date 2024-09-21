@@ -1,6 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 
-const Watchlist = () => {
+const Watchlist = ({ watchlist }) => {
+  const [search, setSearch] = useState("");
+
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
+  };
   return (
     <>
       <div className="flex justify-center flex-wrap m-4">
@@ -14,6 +19,8 @@ const Watchlist = () => {
 
       <div className="flex justify-center my-4">
         <input
+          onChange={(e) => handleSearch(e)}
+          value={search}
           type="text"
           placeholder="Search Movies"
           className="h-[3rem] w-[18rem] bg-gray-200 outline-none px-4"
@@ -30,20 +37,30 @@ const Watchlist = () => {
             </tr>
           </thead>
           <tbody>
-            <tr className="border-b-2">
-              <td className="flex items-center px-6 py-4">
-                <img
-                  className="h-[6rem] w-[10rem]"
-                  src={`https://cdn.prod.website-files.com/6009ec8cda7f305645c9d91b/66a4263d01a185d5ea22eeec_6408f6e7b5811271dc883aa8_batman-min.png`}
-                  alt=""
-                />
-                <div className="mx-10">The Batman</div>
-              </td>
-              <td>8.9</td>
-              <td>9</td>
-              <td>Action,Thriller</td>
-              <td className="text-red-800">Delete</td>
-            </tr>
+            {watchlist
+              .filter((movieObj) => {
+                return movieObj.title
+                  .toLowerCase()
+                  .includes(search.toLocaleLowerCase());
+              })
+              .map((movieObj) => {
+                return (
+                  <tr className="border-b-2">
+                    <td className="flex items-center px-6 py-4">
+                      <img
+                        className="h-[6rem] w-[10rem]"
+                        src={`https://image.tmdb.org/t/p/w200/${movieObj.poster_path}`}
+                        alt=""
+                      />
+                      <div className="mx-10">{movieObj.title}</div>
+                    </td>
+                    <td>{movieObj.average}</td>
+                    <td>{movieObj.popularity}</td>
+                    <td>Action,Thriller</td>
+                    <td className="text-red-800">Delete</td>
+                  </tr>
+                );
+              })}
           </tbody>
         </table>
       </div>
