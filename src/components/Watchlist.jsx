@@ -1,10 +1,22 @@
 import React, { useState } from "react";
 
-const Watchlist = ({ watchlist }) => {
+const Watchlist = ({ watchlist, setWatchList }) => {
   const [search, setSearch] = useState("");
-
   const handleSearch = (e) => {
     setSearch(e.target.value);
+  };
+
+  let sortIncreasing = () => {
+    let sortedIncreaing = watchlist.sort((movieA, movieB) => {
+      return movieA.vote_average - movieB.vote_average;
+    });
+    setWatchList([...sortedIncreaing]);
+  };
+  let sortDecreasing = () => {
+    let sortedDereacing = watchlist.sort((movieA, movieB) => {
+      return movieB.vote_average - movieA.vote_average;
+    });
+    setWatchList([...sortedDereacing]);
   };
   return (
     <>
@@ -31,7 +43,15 @@ const Watchlist = ({ watchlist }) => {
           <thead className="border-b-2">
             <tr>
               <th>Name</th>
-              <th>Rating</th>
+              <th className="flex justify-center">
+                <div onClick={sortIncreasing} className="p-2">
+                  <i className="fa-solid fa-arrow-up"></i>
+                </div>
+                <div className="p-2">Ratings</div>
+                <div onClick={sortDecreasing} className="p-2">
+                  <i className="fa-solid fa-arrow-down"></i>
+                </div>
+              </th>
               <th>Popularity</th>
               <th>Genre</th>
             </tr>
@@ -54,7 +74,7 @@ const Watchlist = ({ watchlist }) => {
                       />
                       <div className="mx-10">{movieObj.title}</div>
                     </td>
-                    <td>{movieObj.average}</td>
+                    <td>{movieObj.vote_average}</td>
                     <td>{movieObj.popularity}</td>
                     <td>Action,Thriller</td>
                     <td className="text-red-800">Delete</td>

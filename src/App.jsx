@@ -18,6 +18,7 @@ function App() {
       return movie.id != movieObj.id;
     });
     localStorage.setItem("moviesApp", JSON.stringify(filteredWatchList));
+
     setWatchList(filteredWatchList);
   };
   useEffect(() => {
@@ -26,7 +27,8 @@ function App() {
       return;
     }
     setWatchList(JSON.parse(moviesFromLocalStorage));
-  }, [handleAddWatchlist, handelRemoveFromWatchList]);
+    return;
+  }, []);
 
   return (
     <>
@@ -48,7 +50,9 @@ function App() {
           />
           <Route
             path="/watchlist"
-            element={<Watchlist watchlist={watchlist} />}
+            element={
+              <Watchlist watchlist={watchlist} setWatchList={setWatchList} />
+            }
           />
         </Routes>
       </BrowserRouter>
