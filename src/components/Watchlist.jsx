@@ -41,8 +41,8 @@ const Watchlist = ({ watchlist, setWatchList, handelRemoveFromWatchList }) => {
                 handleFilter(genre);
               }}
               className={
-                currGenre == genre
-                  ? " flex justify-center items-center h-[3rem] w-[9rem] bg-blue-400 rounded-xl text-white font-bold  mx-4"
+                currGenre === genre
+                  ? "flex justify-center items-center h-[3rem] w-[9rem] bg-blue-400 rounded-xl text-white font-bold  mx-4"
                   : " flex justify-center items-center h-[3rem] w-[9rem] bg-gray-400/50 rounded-xl text-white font-bold mx-4 "
               }
             >
@@ -82,10 +82,10 @@ const Watchlist = ({ watchlist, setWatchList, handelRemoveFromWatchList }) => {
           <tbody>
             {watchlist
               .filter((movieobj) => {
-                if (currGenre == "All Genres") {
+                if (currGenre === "All Genres") {
                   return true;
                 } else {
-                  return genreids[movieobj.genre_ids[0]] == currGenre;
+                  return genreids[movieobj.genre_ids[0]] === currGenre;
                 }
               })
               .filter((movieObj) => {

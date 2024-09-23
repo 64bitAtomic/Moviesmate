@@ -4,7 +4,7 @@ import Banner from "./components/Banner";
 import Movies from "./components/Movies";
 import NavBar from "./components/NavBar";
 import Watchlist from "./components/Watchlist";
-import { BrowserRouter, Routes, Route, json } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 function App() {
   let [watchlist, setWatchList] = useState([]);
   let handleAddWatchlist = (movieObj) => {
@@ -15,7 +15,7 @@ function App() {
   };
   let handelRemoveFromWatchList = (movieObj) => {
     let filteredWatchList = watchlist.filter((movie) => {
-      return movie.id != movieObj.id;
+      return movie.id !== movieObj.id;
     });
     localStorage.setItem("moviesApp", JSON.stringify(filteredWatchList));
 
