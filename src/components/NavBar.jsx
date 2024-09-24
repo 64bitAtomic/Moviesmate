@@ -12,6 +12,9 @@ const NavBar = () => {
       <Link to="/watchlist" className="text-blue-400 text-3xl font-bold">
         Watchlist
       </Link>
+      <Link to="/about" className="text-blue-400 text-3xl font-bold">
+        About
+      </Link>
     </div>
   );
 };
